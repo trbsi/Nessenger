@@ -9,9 +9,9 @@
                         </div>
                     </section>
                 </div>
-                <div class="col-foot">
+                <div class="col-foot" id="composeMessageWrapper">
                     <div class="compose">
-                        <input placeholder="{{ __('home.type_msg_input') }}" id="typeMessage">
+                        <textarea placeholder="{{ __('home.type_msg_input') }}" id="typeMessage" class="w-11/12"></textarea>
                         <div class="compose-dock">
                             <div class="dock"><img src="./img/picture.svg"><img src="./img/send.png" id="sendMessageIcon"></div>
                         </div>
@@ -24,17 +24,6 @@
 
 @push('js')
     <script>
-        $("#typeMessage").on('keyup', function (e) {
-            if (e.key === 'Enter' || e.keyCode === 13) {
-                updateMessage(
-                    '{{ route('v1.messages.send') }}',
-                    '{{ __('messages.empty_message') }}',
-                    $(this).val()
-                );
-
-            }
-        });
-
         $('#sendMessageIcon').click(function () {
             updateMessage(
                 '{{ route('v1.messages.send') }}',
@@ -42,6 +31,25 @@
                 $("#typeMessage").val()
             );
 
+        });
+
+        //CTRL + ENTER for new line
+        //https://stackoverflow.com/questions/8187512/textarea-control-custom-behavior-enter-ctrlenter
+        $('textarea#typeMessage').keydown(function (e) {
+            if ((e.keyCode === 13 && e.ctrlKey) || (e.keyCode === 13 && e.shiftKey)) {
+                $(this).val(function(i,val) {
+                    return val + "";
+                });
+            }
+        }).keypress(function(e){
+            if (e.keyCode === 13 && (!e.ctrlKey && !e.shiftKey)) {
+                updateMessage(
+                    '{{ route('v1.messages.send') }}',
+                    '{{ __('messages.empty_message') }}',
+                    $(this).val()
+                );
+                return false;
+            }
         });
 
     </script>

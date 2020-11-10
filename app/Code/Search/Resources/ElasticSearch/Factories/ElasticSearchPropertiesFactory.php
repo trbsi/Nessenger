@@ -10,7 +10,7 @@ class ElasticSearchPropertiesFactory
     public function getPropertiesByIndexName(string $indexName): array
     {
         switch ($indexName) {
-            case SearchEnum::INDEX_NAME_DIRTBAG:
+            case SearchEnum::INDEX_NAME_MESSAGES:
                 return $this->getDirtBagProperties();
             default:
                 throw new Exception('Wrong index name: '.$indexName);

@@ -57,7 +57,7 @@ class ElasticSearchCrudCommand extends Command
         $deleteIndex = (bool) $this->option('delete');
         $indexDocument = (bool) $this->option('index-doc');
         if ($this->indexName === 'default') {
-            $this->indexName = SearchEnum::INDEX_NAME_DIRTBAG;
+            $this->indexName = SearchEnum::INDEX_NAME_MESSAGES;
         }
 
         if ($deleteIndex) {

@@ -3,6 +3,9 @@ function updateMessage(
     emptyMessageError,
     message
 ) {
+    message = message.trim();
+    //https://stackoverflow.com/questions/863779/how-to-add-line-breaks-to-an-html-textarea
+    message = message.replace(/\r?\n/g, '<br>');
     if (message === '') {
         Swal.fire(
             'Oops',
@@ -35,6 +38,7 @@ function updateMessage(
             $(append).appendTo('.grid-message');
 
             $(".col-content").animate({ scrollTop: $(document).height() }, 1000);
+            $('textarea#typeMessage').val('');
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -43,7 +47,7 @@ function updateMessage(
     });
 }
 
-
+//ADJUST SOME HEIGHTS
 $(document).ready(function() {
     var windowH = $(window).height();
     var headerH = $('#navbar').outerHeight();
@@ -52,5 +56,6 @@ $(document).ready(function() {
 
     //resize inner messages window
     var composeMessageH = $('.col-foot').height();
-    $('#innerMessagesScreen').css('height', (windowH-headerH-composeMessageH)+'px');
+    var innerMessagesScreenH = (windowH-headerH-composeMessageH)+'px';
+    $('#innerMessagesScreen').css('height', innerMessagesScreenH);
 });
