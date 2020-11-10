@@ -14,6 +14,7 @@ class AddTwoFactorColumnsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
             $table->text('two_factor_secret')
                     ->after('password')
                     ->nullable();
