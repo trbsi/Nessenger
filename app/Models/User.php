@@ -59,15 +59,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    private ?string $username;
-
-    public function getUsername(): ?string
+    public function getUserName(): ?string
     {
-        return $this->username;
+        return $this->name;
     }
 
-    public function setUsername(string $username): string
+    public function setUserName(?string $name): ?string
     {
-        $this->username = $username;
+        $this->name = $name;
     }
 }
