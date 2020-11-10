@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ env('APP_NAME') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
@@ -18,14 +19,9 @@
 </div>
 @livewireScripts
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="{{ asset('js/messages.js') }}"></script>
 
-<script>
-    $(document).ready(function() {
-        var windowsH = $(window).height();
-        var headerH = $('#navbar').outerHeight();
-        $('#main').height(windowsH-headerH);
-        $('#messages').height(windowsH-headerH);
-    });
-</script>
+@stack('js')
 </body>
 </html>

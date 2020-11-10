@@ -22,3 +22,5 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::group([], function() {
     Route::get('/', [HomeController::class, 'home'])->name('home');
 });
+
+require_once __DIR__.'/api/v1/messages.php';

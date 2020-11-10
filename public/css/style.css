@@ -460,7 +460,7 @@ main {
 }
 
 .message {
-    min-height: 53.33203125em;
+    /*min-height: 53.33203125em;*/
     display: -ms-flexbox;
     display: -webkit-box;
     display: flex;

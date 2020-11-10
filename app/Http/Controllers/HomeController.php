@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
-use Nubs\RandomNameGenerator\All;
 
 class HomeController extends Controller
 {

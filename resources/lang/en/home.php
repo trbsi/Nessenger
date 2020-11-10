@@ -5,5 +5,6 @@ return [
     'register' => 'Register',
     'contact_me' => 'Contact me',
     'hi' => 'Hi',
-    'login_as_test_user' => 'Login as test user',
+    'login_as_test_user' => 'Login as t,est user',
+    'type_msg_input' => 'Type a message'
 ];
