@@ -16,8 +16,7 @@
     @include('home.navbar')
     <main>
         <div class="flex flex-wrap overflow-hidden"  id="main">
-
-            <div class="sm:w-1/2 md:w-1/3 lg:w-3/4 xl:w-3/4 overflow-hidden">
+            <div class="overflow-hidden w-full">
                 <div class="col" id="messages">
                     <div class="col-content">
                         <section class="message">
@@ -121,52 +120,7 @@
                     </div>
                 </div>
             </div>
-
-            <div class="sm:w-1/2 md:w-1/3 lg:w-3/12 xl:w-3/12 overflow-hidden">
-                <div class="col-right">
-                    <div class="col-content">
-                        <div class="user-panel">
-                            <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-5 h-16" id="username" type="text" placeholder="{{__('home.search_term')}}">
-                            <button class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded w-full">
-                                {{__('home.search_btn')}}
-                            </button>
-                        </div>
-                    </div>
-                    <div class="col-content">
-                        <div class="user-panel">
-                            <div class="inline-flex w-full">
-                                <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l w-2/4 text-center" href="{{route('login')}}">
-                                    {{__('home.login')}}
-                                </a>
-                                <a class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r w-2/4 text-center" href="{{route('register')}}">
-                                    {{__('home.register')}}
-                                </a>
-                            </div>
-
-                            <div class="mt-5">
-                                <a class="bg-white w-full flex text-center justify-center hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-                                    {{__('home.login_as_test_user')}}
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-content">
-                        <div class="user-panel">
-                            <div class="bg-blue-100 border-t border-b border-blue-500 text-blue-700 px-4 py-3" role="alert">
-                                <p class="font-bold">{{__('home.help_header')}}</p>
-                            </div>
-                            <ul id="help-links">
-                                <li><a class="link" href="mailto:{{config('app.contact_mail')}}">{{__('home.contact_me')}}</a></li>
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-
     </main>
 </div>
 @livewireScripts

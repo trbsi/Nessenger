@@ -18,8 +18,8 @@ class UsersSeeder extends Seeder
         $users = [
             [
                 'name' => 'Janja Marmelada',
-                'email' => 'janja@test.com',
-                'password' => Hash::make(123456)
+                'email' => config('app.test_user.email'),
+                'password' => Hash::make(config('app.test_user.password'))
             ]
         ];
 

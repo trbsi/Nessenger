@@ -233,4 +233,9 @@ return [
 
     ],
 
+    'test_user' => [
+        'email' => 'janja@test.com',
+        'password' => 123456
+    ]
+
 ];
