@@ -6,7 +6,7 @@
       <i class="fas fa-search m-3 mr-5 text-lg text-gray-700 w-4 h-4">
       </i>
     </span>
-    <div class="flex flex-row-reverse mr-8 hidden md:flex">
+    <div class="flex flex-row-reverse mr-8 md:flex">
         <div x-data="{ dropdownOpen: false }" class="relative flex flex-row-reverse mr-4 ml-4">
             <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded p-2 focus:outline-none">
                 <i class="fas fa-bars"></i>
@@ -44,7 +44,7 @@
             </div>
         </div>
         @auth
-            <span class=" py-2 px-2 m-2">
+            <span class="hidden md:block py-2 px-2 m-2">
                 {{ __('home.hi') }} {{ $username }}
             </span>
         @endauth

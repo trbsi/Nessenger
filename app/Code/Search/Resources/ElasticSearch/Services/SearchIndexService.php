@@ -7,18 +7,17 @@ use Elasticsearch\ClientBuilder;
 
 class SearchIndexService implements SearchIndexServiceInterface
 {
-    public function searchIndex(string $indexName, array $query): array
+    public function searchIndex(string $indexName, array $body): array
     {
         $client = ClientBuilder::create()->build();
         $params = [
             'index' => $indexName,
-            'body'  => [
-                'query' => $query
-            ]
+            'body'  => $body
         ];
 
         $results = $client->search($params);
-        return $results;
+
+        return $results['hits']['hits'];
     }
 }
 
