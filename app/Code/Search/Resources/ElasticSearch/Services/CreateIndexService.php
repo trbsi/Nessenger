@@ -5,6 +5,7 @@ namespace App\Code\Search\Resources\ElasticSearch\Services;
 use App\Code\Search\Enum\SearchEnum;
 use App\Code\Search\Resources\ElasticSearch\Factories\ElasticSearchPropertiesFactory;
 use App\Code\Search\Services\Interfaces\CreateIndexServiceInterface;
+use App\Models\Index;
 use Elasticsearch\ClientBuilder;
 
 class CreateIndexService implements CreateIndexServiceInterface
@@ -17,8 +18,9 @@ class CreateIndexService implements CreateIndexServiceInterface
         $this->elasticSearchPropertiesFactory = $elasticSearchPropertiesFactory;
     }
 
-    public function createIndex(string $indexName): array
+    public function createIndex(string $indexName, bool $createAlias = false): array
     {
+        //create index
         $client = ClientBuilder::create()->build();
         $params = [
             'index' => $indexName,
@@ -36,7 +38,34 @@ class CreateIndexService implements CreateIndexServiceInterface
             ]
         ];
 
+        $responses[] = $client->indices()->create($params);
 
-        return $client->indices()->create($params);
+        //add alias
+        if ($createAlias) {
+            $responses[] = $this->createAliasForIndex($indexName);
+        }
+
+        return $responses;
+    }
+
+    /**
+     * @TODO finish this. Need to add support for aliases
+     */
+    public function createAliasForIndex(string $indexName): array
+    {
+        $client = ClientBuilder::create()->build();
+        $params = [
+            'body' => [
+                'actions' => [
+                    [
+                        'add' => [
+                            'index' => $indexName,
+                            'alias' => '@TODO Create some alias method fetcher'
+                        ]
+                    ]
+                ]
+            ]
+        ];
+        return $client->indices()->updateAliases($params);
     }
 }

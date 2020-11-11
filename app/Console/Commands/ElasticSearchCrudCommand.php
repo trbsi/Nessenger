@@ -6,6 +6,7 @@ use App\Code\Search\Enum\SearchEnum;
 use App\Code\Search\Services\Interfaces\CreateIndexServiceInterface;
 use App\Code\Search\Services\Interfaces\DeleteIndexServiceInterface;
 use App\Code\Search\Services\Interfaces\IndexDocumentServiceInterface;
+use App\Models\Index;
 use Illuminate\Console\Command;
 use Elasticsearch\ClientBuilder;
 
@@ -16,7 +17,7 @@ class ElasticSearchCrudCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'es:crud {index-name=default} {--delete=0} {--index-doc=0}';
+    protected $signature = 'search:crud {index-name=default} {--delete=0} {--index-doc=0}';
 
     /**
      * The console command description.
@@ -57,7 +58,7 @@ class ElasticSearchCrudCommand extends Command
         $deleteIndex = (bool) $this->option('delete');
         $indexDocument = (bool) $this->option('index-doc');
         if ($this->indexName === 'default') {
-            $this->indexName = SearchEnum::INDEX_NAME_MESSAGES;
+            $this->indexName = Index::getCurrentIndexName(SearchEnum::INDEX_TYPE_MESSAGES);
         }
 
         if ($deleteIndex) {

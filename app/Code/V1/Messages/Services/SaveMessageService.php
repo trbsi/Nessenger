@@ -4,6 +4,7 @@ namespace App\Code\V1\Messages\Services;
 
 use App\Code\Search\Enum\SearchEnum;
 use App\Code\Search\Services\Interfaces\IndexDocumentServiceInterface;
+use App\Models\Index;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,6 +34,8 @@ class SaveMessageService
             'created_at' => $model->getCreatedAt(),
             'user_id' => $model->getUserId(),
         ];
-        $this->indexDocumentService->indexDocument(SearchEnum::INDEX_NAME_MESSAGES, $data);
+
+        $indexName = Index::getCurrentIndexName(SearchEnum::INDEX_TYPE_MESSAGES);
+        $this->indexDocumentService->indexDocument($indexName, $data);
     }
 }

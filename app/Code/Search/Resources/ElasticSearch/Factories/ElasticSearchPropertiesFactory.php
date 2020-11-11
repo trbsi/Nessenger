@@ -7,13 +7,13 @@ use Exception;
 
 class ElasticSearchPropertiesFactory
 {
-    public function getPropertiesByIndexName(string $indexName): array
+    public function getPropertiesByIndexName(string $indexType): array
     {
-        switch ($indexName) {
-            case SearchEnum::INDEX_NAME_MESSAGES:
+        switch ($indexType) {
+            case SearchEnum::INDEX_TYPE_MESSAGES:
                 return $this->getDirtBagProperties();
             default:
-                throw new Exception('Wrong index name: '.$indexName);
+                throw new Exception('Wrong index name: '.$indexType);
         }
     }
 

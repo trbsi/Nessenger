@@ -5,6 +5,7 @@ namespace App\Code\V1\Messages\Services;
 use App\Code\Search\Enum\SearchEnum;
 use App\Code\Search\Services\Interfaces\IndexDocumentServiceInterface;
 use App\Code\Search\Services\Interfaces\SearchIndexServiceInterface;
+use App\Models\Index;
 use Illuminate\Support\Facades\Auth;
 
 class GetLastMessagesService
@@ -44,6 +45,7 @@ class GetLastMessagesService
             ],
         ];
 
-        return $this->searchIndexService->searchIndex(SearchEnum::INDEX_NAME_MESSAGES, $body);
+        $indexName = Index::getCurrentIndexName(SearchEnum::INDEX_TYPE_MESSAGES);
+        return $this->searchIndexService->searchIndex($indexName, $body);
     }
 }
