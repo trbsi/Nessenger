@@ -17,7 +17,7 @@ class CreateIndexesTable extends Migration
             $table->engine = 'InnoDB';
             $table->id();
             $table->string('index_name', 50);
-            $table->string('index_type');
+            $table->string('index_type')->unique();
             $table->tinyInteger('is_default')->default(0);
             $table->timestamps();
         });

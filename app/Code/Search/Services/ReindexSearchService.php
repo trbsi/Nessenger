@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Collection;
 final class ReindexSearchService
 {
     private string $newIndexName;
+    private string $oldIndexName;
 
     private CreateIndexServiceInterface $createIndexService;
     private DeleteIndexServiceInterface $deleteIndexService;
@@ -28,7 +29,8 @@ final class ReindexSearchService
         $this->createIndexService = $createIndexService;
         $this->deleteIndexService = $deleteIndexService;
         $this->bulkIndexDocumentService = $bulkIndexDocumentService;
-        $this->newIndexName = sprintf('%s_%s', SearchEnum::INDEX_TYPE_MESSAGES, date('Y_m_d'));
+        $this->newIndexName = sprintf('%s_%s', SearchEnum::INDEX_TYPE_MESSAGES, date('Y_m_d_H_i_s'));
+        $this->oldIndexName = Index::getCurrentIndexName(SearchEnum::INDEX_TYPE_MESSAGES);
     }
 
     public function reindex(int $perPage): void
@@ -43,7 +45,7 @@ final class ReindexSearchService
         } while($messages->isNotEmpty());
 
         $this->saveNewIndexAndRemoveOldOneFromDatabase();
-        $this->deleteIndex();
+        $this->deleteOldIndex();
     }
 
     private function indexDocuments(Collection $messages): void
@@ -75,22 +77,19 @@ final class ReindexSearchService
         $this->createIndexService->createIndex($this->newIndexName, SearchEnum::INDEX_TYPE_MESSAGES);
     }
 
-    private function deleteIndex(): void
+    private function deleteOldIndex(): void
     {
-        $this->deleteIndexService->deleteIndex($this->newIndexName);
+        $this->deleteIndexService->deleteIndex($this->oldIndexName);
     }
 
     private function saveNewIndexAndRemoveOldOneFromDatabase()
     {
-        $index = new Index();
-        $index
-            ->setIndexName($this->newIndexName)
-            ->setIndexType(SearchEnum::INDEX_TYPE_MESSAGES)
-            ->setIsDefault(true);
-        $index->save();
-
-        Index::where('index_type', SearchEnum::INDEX_TYPE_MESSAGES)
-            ->where('id', '!=', $index->getId())
-            ->delete();
+        Index::updateOrCreate(
+            ['index_type' => SearchEnum::INDEX_TYPE_MESSAGES],
+            [
+                'index_name' => $this->newIndexName,
+                'is_default' => true
+            ]
+        );
     }
 }

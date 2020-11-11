@@ -49,13 +49,18 @@ function updateMessage(
 
 //ADJUST SOME HEIGHTS
 $(document).ready(function() {
+    //resize outer message screen, messages + compose area
     var windowH = $(window).height();
     var headerH = $('#navbar').outerHeight();
-    $('#main').height(windowH-headerH);
-    $('#outerMessagesScreen').height(windowH-headerH);
+    var customAlertH = $('.custom-alert').outerHeight();
+    if (customAlertH === undefined) {
+        customAlertH = 0;
+    }
+    var totalHeight = windowH-headerH-customAlertH;
+    $('#outerMessagesScreen').height(totalHeight);
 
     //resize inner messages window
     var composeMessageH = $('.col-foot').height();
-    var innerMessagesScreenH = (windowH-headerH-composeMessageH)+'px';
+    var innerMessagesScreenH = (totalHeight-composeMessageH)+'px';
     $('#innerMessagesScreen').css('height', innerMessagesScreenH);
 });

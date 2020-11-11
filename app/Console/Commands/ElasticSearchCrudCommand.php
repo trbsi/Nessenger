@@ -62,8 +62,7 @@ class ElasticSearchCrudCommand extends Command
         }
 
         if ($deleteIndex) {
-            $this->delete();
-            $response = $this->create();
+            $response = $this->delete();
         } elseif($indexDocument) {
             $response = $this->indexDocument();
         } else {

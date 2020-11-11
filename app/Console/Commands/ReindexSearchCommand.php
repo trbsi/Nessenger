@@ -17,7 +17,7 @@ class ReindexSearchCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'es:reindex {per-page=1000}';
+    protected $signature = 'search:reindex {per-page=1000}';
 
     /**
      * The console command description.

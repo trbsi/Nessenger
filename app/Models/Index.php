@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Index extends Model
 {
+    protected $table = 'indexes';
+
+    protected $fillable = ['index_name', 'index_type', 'is_default'];
+
     use HasFactory;
 
     public static function getCurrentIndexName(string $type): string
@@ -23,34 +27,34 @@ class Index extends Model
 
     public function getIndexName(): string
     {
-        return $this->indexName;
+        return $this->index_name;
     }
 
     public function setIndexName(string $indexName): self
     {
-        $this->indexName = $indexName;
+        $this->index_name = $indexName;
         return $this;
     }
 
     public function getIndexType(): string
     {
-        return $this->indexType;
+        return $this->index_type;
     }
 
     public function setIndexType(string $indexType): self
     {
-        $this->indexType = $indexType;
+        $this->index_type = $indexType;
         return $this;
     }
 
     public function isDefault(): bool
     {
-        return $this->isDefault;
+        return $this->is_default;
     }
 
     public function setIsDefault(bool $isDefault): self
     {
-        $this->isDefault = $isDefault;
+        $this->is_default = $isDefault;
         return $this;
     }
 }
