@@ -18,7 +18,7 @@ class CreateIndexService implements CreateIndexServiceInterface
         $this->elasticSearchPropertiesFactory = $elasticSearchPropertiesFactory;
     }
 
-    public function createIndex(string $indexName, bool $createAlias = false): array
+    public function createIndex(string $indexName, string $indexType, bool $createAlias = false): array
     {
         //create index
         $client = ClientBuilder::create()->build();
@@ -33,7 +33,7 @@ class CreateIndexService implements CreateIndexServiceInterface
                     '_source' => [
                         'enabled' => true
                     ],
-                    'properties' => $this->elasticSearchPropertiesFactory->getPropertiesByIndexName($indexName),
+                    'properties' => $this->elasticSearchPropertiesFactory->getPropertiesByIndexType($indexType),
                 ]
             ]
         ];
@@ -49,7 +49,7 @@ class CreateIndexService implements CreateIndexServiceInterface
     }
 
     /**
-     * @TODO finish this. Need to add support for aliases
+     * @TODO finish this. Need to add support for aliases. Not neccessary for now
      */
     public function createAliasForIndex(string $indexName): array
     {

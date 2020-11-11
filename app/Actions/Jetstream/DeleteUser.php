@@ -16,6 +16,7 @@ class DeleteUser implements DeletesUsers
     {
         $user->deleteProfilePhoto();
         $user->tokens->each->delete();
+        //TODO remove things from ElasticSearch
         $user->delete();
     }
 }

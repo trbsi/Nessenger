@@ -4,5 +4,5 @@ namespace App\Code\Search\Services\Interfaces;
 
 interface CreateIndexServiceInterface
 {
-    public function createIndex(string $indexName): array;
+    public function createIndex(string $indexName, string $indexType, bool $createAlias = false): array;
 }

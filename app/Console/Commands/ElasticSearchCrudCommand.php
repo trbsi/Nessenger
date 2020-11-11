@@ -81,7 +81,7 @@ class ElasticSearchCrudCommand extends Command
 
     private function create(): array
     {
-        return $this->createIndexService->createIndex($this->indexName);
+        return $this->createIndexService->createIndex($this->indexName, SearchEnum::INDEX_TYPE_MESSAGES);
     }
 
     private function indexDocument(): array

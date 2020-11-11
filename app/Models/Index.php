@@ -16,6 +16,11 @@ class Index extends Model
         return $index->getIndexName();
     }
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getIndexName(): string
     {
         return $this->indexName;

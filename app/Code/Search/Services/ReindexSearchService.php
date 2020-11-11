@@ -8,6 +8,7 @@ use App\Code\Search\Enum\SearchEnum;
 use App\Code\Search\Services\Interfaces\BulkIndexDocumentServiceInterface;
 use App\Code\Search\Services\Interfaces\CreateIndexServiceInterface;
 use App\Code\Search\Services\Interfaces\DeleteIndexServiceInterface;
+use App\Models\Index;
 use App\Models\Message;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -40,14 +41,9 @@ final class ReindexSearchService
             $this->indexDocuments($messages);
             $offset = $offset + $perPage;
         } while($messages->isNotEmpty());
-        //SAVE IN OUR DB, SET AS DEFAULT
-        //REMOVE OLD indexes from DB
-        //DELETE OLD INDEX
-    }
 
-    private function createIndex(): void
-    {
-        $this->createIndexService->createIndex(/*TODO*/);
+        $this->saveNewIndexAndRemoveOldOneFromDatabase();
+        $this->deleteIndex();
     }
 
     private function indexDocuments(Collection $messages): void
@@ -74,8 +70,27 @@ final class ReindexSearchService
         $this->bulkIndexDocumentService->indexDocuments($params);
     }
 
+    private function createIndex(): void
+    {
+        $this->createIndexService->createIndex($this->newIndexName, SearchEnum::INDEX_TYPE_MESSAGES);
+    }
+
     private function deleteIndex(): void
     {
+        $this->deleteIndexService->deleteIndex($this->newIndexName);
+    }
 
+    private function saveNewIndexAndRemoveOldOneFromDatabase()
+    {
+        $index = new Index();
+        $index
+            ->setIndexName($this->newIndexName)
+            ->setIndexType(SearchEnum::INDEX_TYPE_MESSAGES)
+            ->setIsDefault(true);
+        $index->save();
+
+        Index::where('index_type', SearchEnum::INDEX_TYPE_MESSAGES)
+            ->where('id', '!=', $index->getId())
+            ->delete();
     }
 }

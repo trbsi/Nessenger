@@ -7,7 +7,7 @@ use Exception;
 
 class ElasticSearchPropertiesFactory
 {
-    public function getPropertiesByIndexName(string $indexType): array
+    public function getPropertiesByIndexType(string $indexType): array
     {
         switch ($indexType) {
             case SearchEnum::INDEX_TYPE_MESSAGES:
