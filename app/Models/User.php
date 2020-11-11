@@ -59,13 +59,19 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
     public function getUserName(): ?string
     {
         return $this->name;
     }
 
-    public function setUserName(?string $name): ?string
+    public function setUserName(?string $name): self
     {
         $this->name = $name;
+        return $this;
     }
 }

@@ -2,10 +2,19 @@
 
 namespace App\Actions\Jetstream;
 
+use App\Code\User\Services\DeleteUserDataFromIndex;
+use App\Models\User;
 use Laravel\Jetstream\Contracts\DeletesUsers;
 
 class DeleteUser implements DeletesUsers
 {
+    private DeleteUserDataFromIndex $deleteUserDataFromIndex;
+
+    public function __construct(DeleteUserDataFromIndex $deleteUserDataFromIndex)
+    {
+        $this->deleteUserDataFromIndex = $deleteUserDataFromIndex;
+    }
+
     /**
      * Delete the given user.
      *
@@ -14,9 +23,10 @@ class DeleteUser implements DeletesUsers
      */
     public function delete($user)
     {
+        /** @var User $user */
         $user->deleteProfilePhoto();
         $user->tokens->each->delete();
-        //TODO remove things from ElasticSearch
+        $this->deleteUserDataFromIndex->deleteDataFromIndex($user->getId());
         $user->delete();
     }
 }
