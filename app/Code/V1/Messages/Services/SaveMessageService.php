@@ -11,18 +11,32 @@ use Illuminate\Support\Facades\Auth;
 class SaveMessageService
 {
     private IndexDocumentServiceInterface $indexDocumentService;
+    private MessageUrlDetector $messageUrlDetector;
 
-    public function __construct(IndexDocumentServiceInterface $indexDocumentService)
-    {
+    public function __construct(
+        IndexDocumentServiceInterface $indexDocumentService,
+        MessageUrlDetector $messageUrlDetector
+    ){
         $this->indexDocumentService = $indexDocumentService;
+        $this->messageUrlDetector = $messageUrlDetector;
     }
 
-    public function saveMessage(string $message)
+    public function saveMessage(string $message): Message
     {
+        //because column type in MySql is "text"
         if (strlen($message) > 65000) {
             $message = substr($message, 0, 65000);
         }
 
+        $message = $this->messageUrlDetector->replaceUrlWithClickableLinks($message);
+        $message = strip_tags($message, '<a><br>');
+
+        $model = $this->saveAndIndex($message);
+        return $model;
+    }
+
+    private function saveAndIndex(string $message): Message
+    {
         $model = new Message();
         $model
             ->setMessage($message)
@@ -37,5 +51,7 @@ class SaveMessageService
 
         $indexName = Index::getCurrentIndexName(SearchEnum::INDEX_TYPE_MESSAGES);
         $this->indexDocumentService->indexDocument($indexName, $data);
+
+        return $model;
     }
 }

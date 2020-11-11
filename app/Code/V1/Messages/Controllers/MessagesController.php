@@ -10,7 +10,9 @@ class MessagesController
 {
     public function send(Request $request, SaveMessageService $saveMessageService)
     {
-        $saveMessageService->saveMessage($request->message);
-        return response()->json([]);
+        $model = $saveMessageService->saveMessage($request->message);
+        return response()->json([
+            'message' => $model->getMessage()
+        ]);
     }
 }

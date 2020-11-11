@@ -31,13 +31,14 @@ function updateMessage(
             var append =
             '<div class="col-message-sent">' +
                 '<div class="message-sent">' +
-                '<p>'+message+'</p>' +
+                '<p>'+data.message+'</p>' +
                 '</div>' +
             '</div>';
-            console.log(append);
+
             $(append).appendTo('.grid-message');
 
-            $(".col-content").animate({ scrollTop: $(document).height() }, 1000);
+            //https://stackoverflow.com/questions/270612/scroll-to-bottom-of-div/26293764
+            scrollMessagesToBottom();
             $('textarea#typeMessage').val('');
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -63,4 +64,13 @@ $(document).ready(function() {
     var composeMessageH = $('.col-foot').height();
     var innerMessagesScreenH = (totalHeight-composeMessageH)+'px';
     $('#innerMessagesScreen').css('height', innerMessagesScreenH);
+
+    scrollMessagesToBottom();
 });
+
+
+function scrollMessagesToBottom() {
+    $(".col-content").scrollTop(function () {
+        return this.scrollHeight;
+    });
+}
