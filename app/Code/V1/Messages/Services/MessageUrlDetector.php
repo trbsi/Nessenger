@@ -14,12 +14,11 @@ class MessageUrlDetector
     {
         $highlighter = new HtmlHighlighter(
             'http', // string - scheme to use for urls matched by top level domain
-            ['class' => 'underline'],     // string[] - key/value map of tag attributes, e.g. ['rel' => 'nofollow', 'class' => 'light']
+            ['class' => 'underline', 'target' => '_blank', 'rel' => 'nofollow'],     // string[] - key/value map of tag attributes, e.g. ['rel' => 'nofollow', 'class' => 'light']
             '',     // string - content to add before highlight: {here}<a...
             ''      // string - content to add after highlight: ...</a>{here}
         );
         $urlHighlight = new UrlHighlight(null, $highlighter);
-        Log::info($urlHighlight->highlightUrls($message));
         return $urlHighlight->highlightUrls($message);
 
     }

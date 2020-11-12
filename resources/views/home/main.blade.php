@@ -34,7 +34,7 @@
 @push('js')
     <script>
         $('#sendMessageIcon').click(function () {
-            updateMessage(
+            sendMessage(
                 '{{ route('v1.messages.send') }}',
                 '{{ __('messages.empty_message') }}',
                 $("#typeMessage").val()
@@ -52,7 +52,7 @@
             }
         }).keypress(function (e) {
             if (e.keyCode === 13 && (!e.ctrlKey && !e.shiftKey)) {
-                updateMessage(
+                sendMessage(
                     '{{ route('v1.messages.send') }}',
                     '{{ __('messages.empty_message') }}',
                     $(this).val()

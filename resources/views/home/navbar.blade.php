@@ -17,10 +17,10 @@
             <div x-show="dropdownOpen" class="absolute right-0 mt-15 w-48 bg-white rounded-md overflow-hidden shadow-xl z-20">
                 @guest
                     <a  href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">
-                        {{__('home.login')}}
+                        {{__('home.links.login')}}
                     </a>
                     <a  href="{{ route('register') }}" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">
-                        {{__('home.register')}}
+                        {{__('home.links.register')}}
                     </a>
                     <a href="{{ route('login', ['test' => 1]) }}" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">
                         {{__('home.login_as_test_user')}}
@@ -28,7 +28,10 @@
                 @endguest
 
                 @auth
-                    <form method="POST" action="{{ route('logout') }}">
+                        <a class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200" href="{{ route('profile.show') }}">
+                            {{__('home.links.settings')}}
+                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
                         <x-jet-dropdown-link href="{{ route('logout') }}"
@@ -38,8 +41,8 @@
                         </x-jet-dropdown-link>
                     </form>
                 @endauth
-                <a href="#" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200" href="mailto:{{config('app.contact_mail')}}">
-                    {{__('home.contact_me')}}
+                <a  class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200" href="mailto:{{config('app.contact_mail')}}">
+                    {{__('home.links.contact_me')}}
                 </a>
             </div>
         </div>

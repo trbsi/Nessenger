@@ -1,4 +1,4 @@
-function updateMessage(
+function sendMessage(
     route,
     emptyMessageError,
     message

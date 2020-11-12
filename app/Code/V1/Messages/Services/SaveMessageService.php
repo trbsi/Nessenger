@@ -4,7 +4,6 @@ namespace App\Code\V1\Messages\Services;
 
 use App\Code\Search\Enum\SearchEnum;
 use App\Code\Search\Services\Interfaces\IndexDocumentServiceInterface;
-use App\Models\Index;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,8 +27,10 @@ class SaveMessageService
             $message = substr($message, 0, 65000);
         }
 
+        $message = htmlspecialchars($message);
+        //https://stackoverflow.com/questions/12819804/how-do-i-use-htmlspecialchars-but-allow-only-specific-html-code-to-pass-through
+        $message = preg_replace('#&lt;(/?(?:br|a))&gt;#', '<\1>', $message);
         $message = $this->messageUrlDetector->replaceUrlWithClickableLinks($message);
-        $message = strip_tags($message, '<a><br>');
 
         $model = $this->saveAndIndex($message);
         return $model;
