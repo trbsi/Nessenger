@@ -74,7 +74,7 @@ final class ReindexSearchService
 
     private function createIndex(): void
     {
-        $this->createIndexService->createIndex($this->newIndexName, SearchEnum::INDEX_TYPE_MESSAGES);
+        $this->createIndexService->createIndex(SearchEnum::INDEX_TYPE_MESSAGES, $this->newIndexName);
     }
 
     private function deleteOldIndex(): void

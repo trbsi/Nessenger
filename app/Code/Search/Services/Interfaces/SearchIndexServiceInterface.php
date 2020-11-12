@@ -4,5 +4,5 @@ namespace App\Code\Search\Services\Interfaces;
 
 interface SearchIndexServiceInterface
 {
-    public function searchIndex(string $indexName, array $query): array;
+    public function searchIndex(string $indexType, array $query): array;
 }

@@ -4,12 +4,15 @@ namespace App\Code\Search\Resources\ElasticSearch\Services;
 
 use App\Code\Search\Enum\SearchEnum;
 use App\Code\Search\Resources\ElasticSearch\Factories\ElasticSearchPropertiesFactory;
+use App\Code\Search\Resources\ElasticSearch\Traits\IndexTrait;
 use App\Code\Search\Services\Interfaces\CreateIndexServiceInterface;
 use App\Models\Index;
 use Elasticsearch\ClientBuilder;
 
 class CreateIndexService implements CreateIndexServiceInterface
 {
+    use IndexTrait;
+
     private ElasticSearchPropertiesFactory $elasticSearchPropertiesFactory;
 
     public function __construct(
@@ -18,9 +21,15 @@ class CreateIndexService implements CreateIndexServiceInterface
         $this->elasticSearchPropertiesFactory = $elasticSearchPropertiesFactory;
     }
 
-    public function createIndex(string $indexName, string $indexType, bool $createAlias = false): array
-    {
-        //create index
+    public function createIndex(
+        string $indexType,
+        ?string $indexName = null,
+        bool $createAlias = false
+    ): array {
+        if (null === $indexName) {
+            $indexName = $this->getIndexName($indexType);
+        }
+
         $client = ClientBuilder::create()->build();
         $params = [
             'index' => $indexName,

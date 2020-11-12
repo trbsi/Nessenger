@@ -6,5 +6,5 @@ namespace App\Code\Search\Services\Interfaces;
 
 interface DeleteByQueryServiceInterface
 {
-    public function deleteByQuery(string $indexName, array $query): array;
+    public function deleteByQuery(string $indexType, array $query): array;
 }

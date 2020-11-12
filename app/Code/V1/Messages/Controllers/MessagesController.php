@@ -15,4 +15,10 @@ class MessagesController
             'message' => $model->getMessage()
         ]);
     }
+
+    public function search(Request $request)
+    {
+
+        return response()->json([]);
+    }
 }

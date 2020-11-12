@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Code\V1\Messages\Services;
 
 use App\Code\Search\Enum\SearchEnum;
@@ -8,30 +10,28 @@ use App\Code\Search\Services\Interfaces\SearchIndexServiceInterface;
 use App\Models\Index;
 use Illuminate\Support\Facades\Auth;
 
-class GetLastMessagesService
+final class SearchMessagesService
 {
-    private const MAX_RESULTS = 100;
-
     private SearchIndexServiceInterface $searchIndexService;
 
-    public function __construct(SearchIndexServiceInterface $searchIndexService)
-    {
+    public function __construct(
+        SearchIndexServiceInterface $searchIndexService
+    ){
         $this->searchIndexService = $searchIndexService;
     }
 
-    public function getLastMessagesForCurrentUser(): array
+    public function search(string $term): array
     {
-        if (null === Auth::id()) {
+        if (strlen($term) <= 3) {
             return [];
         }
 
-        $body = [
+        $query = [
             'sort' => [
                 [
-                    'created_at' => 'asc',
+                    'created_at' => 'desc',
                 ],
             ],
-            'size' => self::MAX_RESULTS,
             'query' => [
                 'bool' => [
                     'must' => [
@@ -40,11 +40,20 @@ class GetLastMessagesService
                                 'user_id' => Auth::id(),
                             ],
                         ],
+                        [
+                            'wildcard' => [
+                                'message' => [
+                                    'value' => sprintf('*%s*', $term),
+                                    'boost' => 1,
+                                    'rewrite' => 'constant_score',
+                                ],
+                            ],
+                        ],
                     ],
                 ],
             ],
         ];
 
-        return $this->searchIndexService->searchIndex(SearchEnum::INDEX_TYPE_MESSAGES, $body);
+        return $this->searchIndexService->searchIndex(SearchEnum::INDEX_TYPE_MESSAGES, $query);
     }
 }

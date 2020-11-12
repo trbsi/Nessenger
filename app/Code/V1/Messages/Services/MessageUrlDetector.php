@@ -8,7 +8,7 @@ use VStelmakh\UrlHighlight\UrlHighlight;
 
 class MessageUrlDetector
 {
-    private const URL_REGEX = '/(https?:\/\/)?[\w\-~]+(\.[\w\-~]+)+(\/[\w\-~@:%]*)*(#[\w\-]*)?(\?[^\s]*)?/i';
+    //private const URL_REGEX = '/(https?:\/\/)?[\w\-~]+(\.[\w\-~]+)+(\/[\w\-~@:%]*)*(#[\w\-]*)?(\?[^\s]*)?/i';
 
     public function replaceUrlWithClickableLinks(string $message): string
     {
@@ -21,7 +21,13 @@ class MessageUrlDetector
         $urlHighlight = new UrlHighlight(null, $highlighter);
         Log::info($urlHighlight->highlightUrls($message));
         return $urlHighlight->highlightUrls($message);
-        /*
+
+    }
+/*
+    //ovo je moj pokušaj nešto napraviti
+    private function myTry()
+    {
+
         preg_match_all(self::URL_REGEX, $message, $matches);
         if (!isset($matches[0])) {
             return $message;
@@ -36,6 +42,7 @@ class MessageUrlDetector
 
         }
         Log::info($message);
-        return $message;*/
+        return $message;
     }
+*/
 }

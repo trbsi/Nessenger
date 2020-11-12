@@ -19,12 +19,11 @@ final class DeleteUserDataFromIndex
 
     public function deleteDataFromIndex(int $userId): void
     {
-        $indexName = Index::getCurrentIndexName(SearchEnum::INDEX_TYPE_MESSAGES);
         $query = [
             'match' => [
                 'user_id' => $userId
             ]
         ];
-        $this->deleteByQueryService->deleteByQuery($indexName, $query);
+        $this->deleteByQueryService->deleteByQuery(SearchEnum::INDEX_TYPE_MESSAGES, $query);
     }
 }

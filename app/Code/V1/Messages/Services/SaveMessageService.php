@@ -49,8 +49,7 @@ class SaveMessageService
             'user_id' => $model->getUserId(),
         ];
 
-        $indexName = Index::getCurrentIndexName(SearchEnum::INDEX_TYPE_MESSAGES);
-        $this->indexDocumentService->indexDocument($indexName, $data);
+        $this->indexDocumentService->indexDocument(SearchEnum::INDEX_TYPE_MESSAGES, $data);
 
         return $model;
     }
