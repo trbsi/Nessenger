@@ -3,11 +3,11 @@
     <span class="w-screen md:w-1/3 h-10 bg-gray-200 cursor-pointer border border-gray-300 text-sm rounded-full flex">
       <input type="text" name="search" placeholder="{{ __('home.search_input_placeholder') }}"
              class="flex-grow px-4 rounded-l-full rounded-r-full text-sm focus:outline-none" id="searchInput">
-      <i class="fas fa-search m-3 mr-5 text-lg text-gray-700 w-4 h-4" id="searchStart">
+      <i class="fas fa-search m-3 mr-5 text-lg text-gray-700 w-4 h-4" id="searchStartIcon">
       </i>
-      <i class="fas fa-times m-3 mr-5 text-lg text-gray-700 w-4 h-4" id="searchReset" style="display: none">
+      <i class="fas fa-times m-3 mr-5 text-lg text-gray-700 w-4 h-4" id="searchResetIcon" style="display: none">
       </i>
-      <i class="fas fa-spinner m-3 mr-5 text-lg text-gray-700 w-4 h-4" id="searchSpinner" style="display: none">
+      <i class="fas fa-spinner m-3 mr-5 text-lg text-gray-700 w-4 h-4" id="searchSpinnerIcon" style="display: none">
       </i>
     </span>
     <div class="flex flex-row-reverse mr-8 md:flex">

@@ -16,9 +16,12 @@
     @include('home.navbar')
     @include('home.messages')
 </div>
-<script src="{{ asset('js/jquery3.min.js') }}"></script>
-<script src="{{ asset('js/app.js') }}"></script>
 @livewireScripts
+<script src="{{ asset('js/jquery3.min.js') }}"></script>
+<!-- highlight keywords -->
+<script src="{{ asset('js/jquery.mark.min.js') }}" defer></script>
+<!-- laravel js -->
+<script src="{{ asset('js/app.js') }}"></script>
 <!-- something for tailwind -->
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 

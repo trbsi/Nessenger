@@ -9,6 +9,7 @@ return [
     ],
     'messages' => [
         'showing_last_x_results' => 'Showing last :maxResults results. If you need more use search engine.',
+        'no_results' => 'No results',
     ],
     'search_input_placeholder' => 'Search (min 3 chars)',
     'hi' => 'Hi',

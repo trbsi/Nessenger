@@ -1,11 +1,12 @@
-var searchSpinner = $('#searchSpinner');
-var searchReset = $('#searchReset');
-var searchStart = $('#searchStart');
+var searchSpinnerIcon = $('#searchSpinnerIcon');
+var searchResetIcon = $('#searchResetIcon');
+var searchStartIcon = $('#searchStartIcon');
 var searchInput = $('#searchInput');
 var searchMessagesWrapper = $('#searchMessagesWrapper');
 var originalMessagesWrapper = $('#originalMessagesWrapper');
 var searchMessagesSpinner = $('#searchMessagesSpinner');
 var searchMessagesGrid = $('#searchMessagesGrid');
+var searchMessagesNoResults = $('#searchMessagesNoResults');
 
 //----------------------------SEND--------------------------
 function sendMessage(
@@ -53,16 +54,20 @@ function sendMessage(
 }
 
 //----------------------------SEARCH--------------------------
-function searchMessages(inputValue, route) {
+function searchMessages(keyword, route) {
     originalMessagesWrapper.hide();
+    searchMessagesGrid.hide();
+    searchMessagesNoResults.hide();
+    searchMessagesGrid.empty();
     searchMessagesWrapper.show();
+    searchMessagesSpinner.show();
 
-    searchStart.hide();
-    searchReset.hide();
-    searchSpinner.show();
+    searchStartIcon.hide();
+    searchResetIcon.hide();
+    searchSpinnerIcon.show();
 
     var data = {
-        message: inputValue
+        message: keyword
     };
 
     $.ajax({
@@ -74,16 +79,25 @@ function searchMessages(inputValue, route) {
         },
         success: function(data, textStatus, jqXHR)
         {
-            $.each(data, function (key, result) {
-                var append = messageHtml(result.message);
-                $(append).appendTo('#searchMessagesGrid');
-            });
+            if (data.length === 0) {
+                searchMessagesGrid.hide();
+                searchMessagesNoResults.show();
+            } else  {
+                $.each(data, function (key, result) {
+                    var append = messageHtml(result.message);
+                    $(append).appendTo('#searchMessagesGrid');
+                });
+                searchMessagesWrapper.mark(keyword);
+                searchMessagesGrid.show();
+                searchMessagesNoResults.hide();
+            }
+
             scrollMessagesToBottom();
             searchMessagesSpinner.hide();
-            searchMessagesGrid.show();
-            searchStart.hide();
-            searchReset.show();
-            searchSpinner.hide();
+            searchStartIcon.hide();
+            searchResetIcon.show();
+            searchSpinnerIcon.hide();
+
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
@@ -113,11 +127,11 @@ function scrollMessagesToBottom() {
 }
 
 //Reseting search bar
-searchReset.click(function () {
+searchResetIcon.click(function () {
     searchInput.val('');
-    searchStart.show();
-    searchReset.hide();
-    searchSpinner.hide();
+    searchStartIcon.show();
+    searchResetIcon.hide();
+    searchSpinnerIcon.hide();
     searchMessagesWrapper.hide();
     originalMessagesWrapper.show();
     scrollMessagesToBottom();

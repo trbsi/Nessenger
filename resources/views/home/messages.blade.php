@@ -4,7 +4,10 @@
             <div class="col" id="outerMessagesScreen">
                 <div class="col-content">
                     <section class="message" id="searchMessagesWrapper" style="display: none">
-                        <div class="flex mt-50 w-full" id="searchMessagesSpinner">@TODO NEKI SPINNER OVDJE</div>
+                        <div class="flex my-32 w-full justify-center" id="searchMessagesSpinner">
+                            <div class="lds-dual-ring"></div>
+                        </div>
+                        <div class="mt-50 w-full text-center" id="searchMessagesNoResults" style="display:none;">{{ __('home.messages.no_results') }}</div>
                         <div class="grid-message w-full" id="searchMessagesGrid" style="display: none">
                         <!-- messages go here -->
                         </div>
