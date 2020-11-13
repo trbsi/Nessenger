@@ -7,6 +7,7 @@ return [
         'register' => 'Register',
         'contact_me' => 'Contact me',
     ],
+    'search_input_placeholder' => 'Search (min 3 chars)',
     'hi' => 'Hi',
     'login_as_test_user' => 'Login as test user',
     'type_msg_input' => 'Type a message',

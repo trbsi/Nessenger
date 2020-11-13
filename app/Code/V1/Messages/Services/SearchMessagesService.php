@@ -54,6 +54,10 @@ final class SearchMessagesService
             ],
         ];
 
-        return $this->searchIndexService->searchIndex(SearchEnum::INDEX_TYPE_MESSAGES, $query);
+        $results = $this->searchIndexService->searchIndex(SearchEnum::INDEX_TYPE_MESSAGES, $query);
+        $results = array_map(function ($result) {
+            return $result['_source'];
+        }, $results);
+        return $results;
     }
 }

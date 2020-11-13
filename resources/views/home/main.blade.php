@@ -3,8 +3,14 @@
         <div class="overflow-hidden w-full">
             <div class="col" id="outerMessagesScreen">
                 <div class="col-content">
-                    <section class="message" id="innerMessagesScreen">
-                        <div class="grid-message w-full">
+                    <section class="message" id="searchMessagesWrapper" style="display: none">
+                        <div class="flex mt-50">@TODO NEKI SPINNER OVDJE</div>
+                        <div class="grid-message w-full" id="searchMessagesGrid">
+                        <!-- messages go here -->
+                        </div>
+                    </section>
+                    <section class="message" id="originalMessagesWrapper">
+                        <div class="grid-message w-full" id="originalMessagesGrid">
                             @foreach($lastMessages as $lastMessages)
                                 <div class="col-message-sent">
                                     <div class="message-sent">
@@ -33,6 +39,7 @@
 
 @push('js')
     <script>
+        //---------------------SEND MESSAGE---------------------------
         $('#sendMessageIcon').click(function () {
             sendMessage(
                 '{{ route('v1.messages.send') }}',
@@ -58,6 +65,13 @@
                     $(this).val()
                 );
                 return false;
+            }
+        });
+
+        //----------------------SEARCH MESSAGES-----------------------------
+        $('#searchInput').keyup(function (e) {
+            if ($(this).val().length >= 3 && e.keyCode === 13) {
+                searchMessages($(this).val(),  '{{ route('v1.messages.search') }}');
             }
         });
 

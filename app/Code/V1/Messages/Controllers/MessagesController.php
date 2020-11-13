@@ -3,6 +3,7 @@
 namespace App\Code\V1\Messages\Controllers;
 
 use App\Code\V1\Messages\Services\SaveMessageService;
+use App\Code\V1\Messages\Services\SearchMessagesService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -16,9 +17,9 @@ class MessagesController
         ]);
     }
 
-    public function search(Request $request)
+    public function search(Request $request, SearchMessagesService $searchMessagesService)
     {
-
-        return response()->json([]);
+        $result = $searchMessagesService->search($request->message);
+        return response()->json($result);
     }
 }
