@@ -27,6 +27,7 @@ class HomeController extends Controller
             'username' => $username ?? '',
             'errorMessage' => $errorMessage,
             'lastMessages' => $getLastMessagesService->getLastMessagesForCurrentUser(),
+            'maxResults' => GetLastMessagesService::MAX_RESULTS
         ]);
     }
 }

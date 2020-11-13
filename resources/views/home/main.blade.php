@@ -11,6 +11,7 @@
                     </section>
                     <section class="message" id="originalMessagesWrapper">
                         <div class="grid-message w-full" id="originalMessagesGrid">
+                            <div class="w-full text-center">{{ __('home.messages.showing_last_x_results', ['maxResults' => $maxResults]) }}</div>
                             @foreach($lastMessages as $lastMessages)
                                 <div class="col-message-sent">
                                     <div class="message-sent">
@@ -27,7 +28,7 @@
                         <textarea placeholder="{{ __('home.type_msg_input') }}" id="typeMessage"
                                   class="w-11/12"></textarea>
                         <div class="compose-dock">
-                            <div class="dock"><img src="./img/picture.svg"><img src="./img/send.png"
+                            <div class="dock"><!-- TODO <img src="./img/picture.svg"> --><img src="./img/send.png"
                                                                                 id="sendMessageIcon"></div>
                         </div>
                     </div>

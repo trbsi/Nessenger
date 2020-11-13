@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class GetLastMessagesService
 {
-    private const MAX_RESULTS = 100;
+    public const MAX_RESULTS = 100;
 
     private SearchIndexServiceInterface $searchIndexService;
 

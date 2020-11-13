@@ -7,6 +7,9 @@ return [
         'register' => 'Register',
         'contact_me' => 'Contact me',
     ],
+    'messages' => [
+        'showing_last_x_results' => 'Showing last :maxResults results. If you need more use search engine.',
+    ],
     'search_input_placeholder' => 'Search (min 3 chars)',
     'hi' => 'Hi',
     'login_as_test_user' => 'Login as test user',
