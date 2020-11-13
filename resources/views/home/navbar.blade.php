@@ -1,5 +1,5 @@
 <div class="w-full flex flex-row items-center p-1 justify-between bg-white shadow-xs" id="navbar">
-    <div class="ml-8 text-lg text-gray-700 hidden md:flex"><a href="/">{{ env('APP_NAME') }}</a></div>
+    <div class="ml-8 text-lg text-gray-700 hidden md:flex"><a href="/"><img src="/img/logo.png" class="logo">{{ env('APP_NAME') }}</a></div>
     <span class="w-screen md:w-1/3 h-10 bg-gray-200 cursor-pointer border border-gray-300 text-sm rounded-full flex">
       <input type="text" name="search" placeholder="{{ __('home.search_input_placeholder') }}"
              class="flex-grow px-4 rounded-l-full rounded-r-full text-sm focus:outline-none" id="searchInput">

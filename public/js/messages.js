@@ -4,6 +4,8 @@ var searchStart = $('#searchStart');
 var searchInput = $('#searchInput');
 var searchMessagesWrapper = $('#searchMessagesWrapper');
 var originalMessagesWrapper = $('#originalMessagesWrapper');
+var searchMessagesSpinner = $('#searchMessagesSpinner');
+var searchMessagesGrid = $('#searchMessagesGrid');
 
 //----------------------------SEND--------------------------
 function sendMessage(
@@ -72,12 +74,13 @@ function searchMessages(inputValue, route) {
         },
         success: function(data, textStatus, jqXHR)
         {
-            console.log(data);
             $.each(data, function (key, result) {
                 var append = messageHtml(result.message);
                 $(append).appendTo('#searchMessagesGrid');
             });
             scrollMessagesToBottom();
+            searchMessagesSpinner.hide();
+            searchMessagesGrid.show();
             searchStart.hide();
             searchReset.show();
             searchSpinner.hide();

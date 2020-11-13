@@ -14,7 +14,7 @@
 <body>
 <div class="wrapper">
     @include('home.navbar')
-    @include('home.main')
+    @include('home.messages')
 </div>
 <script src="{{ asset('js/jquery3.min.js') }}"></script>
 <script src="{{ asset('js/app.js') }}"></script>

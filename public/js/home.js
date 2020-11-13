@@ -13,7 +13,7 @@ $(document).ready(function() {
     //resize inner messages window
     var composeMessageH = $('.col-foot').height();
     var originalMessagesWrapperH = (totalHeight-composeMessageH)+'px';
-    $('#originalMessagesWrapper').css('height', originalMessagesWrapperH);
+    $('section.message').css('height', originalMessagesWrapperH);
 
     scrollMessagesToBottom();
 });
