@@ -26,3 +26,7 @@ https://stackoverflow.com/questions/270612/scroll-to-bottom-of-div/26293764
 
 ## Textarea ctrl + enter and submit
 https://stackoverflow.com/questions/8187512/textarea-control-custom-behavior-enter-ctrlenter
+
+# Laravel
+## CUstom helper function
+https://laravel-news.com/creating-helpers

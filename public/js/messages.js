@@ -87,17 +87,16 @@ function searchMessages(keyword, route) {
                     var append = messageHtml(result.message);
                     $(append).appendTo('#searchMessagesGrid');
                 });
-                searchMessagesWrapper.mark(keyword);
+                searchMessagesGrid.mark(keyword);
                 searchMessagesGrid.show();
                 searchMessagesNoResults.hide();
             }
 
-            scrollMessagesToBottom();
             searchMessagesSpinner.hide();
             searchStartIcon.hide();
-            searchResetIcon.show();
             searchSpinnerIcon.hide();
-
+            searchResetIcon.show();
+            scrollMessagesToBottom();
         },
         error: function (jqXHR, textStatus, errorThrown)
         {

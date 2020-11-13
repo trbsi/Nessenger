@@ -46,7 +46,7 @@
         //---------------------SEND MESSAGE---------------------------
         $('#sendMessageIcon').click(function () {
             sendMessage(
-                '{{ route('v1.messages.send') }}',
+                '{{ api_route('messages.send') }}',
                 '{{ __('messages.empty_message') }}',
                 $("#typeMessage").val()
             );
@@ -65,7 +65,7 @@
             //13 = enter
             if (e.keyCode === 13 && (!e.ctrlKey && !e.shiftKey)) {
                 sendMessage(
-                    '{{ route('v1.messages.send') }}',
+                    '{{ api_route('messages.send') }}',
                     '{{ __('messages.empty_message') }}',
                     $(this).val()
                 );
@@ -77,7 +77,7 @@
         $('#searchInput').keyup(function (e) {
             //13 = enter
             if ($(this).val().length >= 3 && e.keyCode === 13 && '' !== '{{ auth()->id() }}') {
-                searchMessages($(this).val(),  '{{ route('v1.messages.search') }}');
+                searchMessages($(this).val(),  '{{ api_route('messages.search') }}');
             }
         });
 
