@@ -12,8 +12,8 @@ $(document).ready(function() {
 
     //resize inner messages window
     var composeMessageH = $('.col-foot').height();
-    var originalMessagesWrapperH = (totalHeight-composeMessageH)+'px';
-    $('section.message').css('height', originalMessagesWrapperH);
+    var latestMessagesWrapperH = (totalHeight-composeMessageH)+'px';
+    $('section.message').css('height', latestMessagesWrapperH);
 
     scrollMessagesToBottom();
 });

@@ -3,7 +3,7 @@ var searchResetIcon = $('#searchResetIcon');
 var searchStartIcon = $('#searchStartIcon');
 var searchInput = $('#searchInput');
 var searchMessagesWrapper = $('#searchMessagesWrapper');
-var originalMessagesWrapper = $('#originalMessagesWrapper');
+var latestMessagesWrapper = $('#latestMessagesWrapper');
 var searchMessagesSpinner = $('#searchMessagesSpinner');
 var searchMessagesGrid = $('#searchMessagesGrid');
 var searchMessagesNoResults = $('#searchMessagesNoResults');
@@ -74,7 +74,7 @@ function sendMessage(
             //https://stackoverflow.com/questions/270612/scroll-to-bottom-of-div/26293764
             $('textarea#typeMessage').val('');
             searchMessagesWrapper.hide();
-            originalMessagesWrapper.show();
+            latestMessagesWrapper.show();
             scrollMessagesToBottom();
         },
         error: function (jqXHR, textStatus, errorThrown)
@@ -93,7 +93,7 @@ $('#searchInput').keyup(function (e) {
 });
 
 function searchMessages(keyword, route) {
-    originalMessagesWrapper.hide();
+    latestMessagesWrapper.hide();
     searchMessagesGrid.hide();
     searchMessagesNoResults.hide();
     searchMessagesGrid.empty();
@@ -200,6 +200,6 @@ searchResetIcon.click(function () {
     searchResetIcon.hide();
     searchSpinnerIcon.hide();
     searchMessagesWrapper.hide();
-    originalMessagesWrapper.show();
+    latestMessagesWrapper.show();
     scrollMessagesToBottom();
 });

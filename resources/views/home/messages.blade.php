@@ -12,7 +12,7 @@
                         <!-- messages go here -->
                         </div>
                     </section>
-                    <section class="message" id="originalMessagesWrapper">
+                    <section class="message" id="latestMessagesWrapper">
                         <div class="grid-message w-full" id="originalMessagesGrid">
                             <div class="w-full text-center">{{ __('home.messages.showing_last_x_results', ['maxResults' => $maxResults]) }}</div>
                             @foreach($lastMessages as $lastMessages)
