@@ -17,6 +17,8 @@
     @include('home.messages')
 </div>
 @livewireScripts
+@include('javascript.routes')
+@include('javascript.translations')
 <script src="{{ asset('js/jquery3.min.js') }}"></script>
 <!-- highlight keywords -->
 <script src="{{ asset('js/jquery.mark.min.js') }}" defer></script>

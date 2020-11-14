@@ -1,6 +1,7 @@
 <?php
 return [
     'search_term' => 'What do you want to find?',
+    'are_you_sure' => 'Are you sure?',
     'links' => [
       'settings' => 'Settings',
         'login' => 'Login',

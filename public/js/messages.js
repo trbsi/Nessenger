@@ -9,6 +9,35 @@ var searchMessagesGrid = $('#searchMessagesGrid');
 var searchMessagesNoResults = $('#searchMessagesNoResults');
 
 //----------------------------SEND--------------------------
+$('#sendMessageIcon').click(function () {
+    sendMessage(
+        sendMessageRoute,
+        emptyMessageTranslation,
+        $("#typeMessage").val()
+);
+
+});
+
+//CTRL + ENTER for new line
+//https://stackoverflow.com/questions/8187512/textarea-control-custom-behavior-enter-ctrlenter
+$('textarea#typeMessage').keydown(function (e) {
+    if ((e.keyCode === 13 && e.ctrlKey) || (e.keyCode === 13 && e.shiftKey)) {
+        $(this).val(function (i, val) {
+            return val + "";
+        });
+    }
+}).keypress(function (e) {
+    //13 = enter
+    if (e.keyCode === 13 && (!e.ctrlKey && !e.shiftKey)) {
+        sendMessage(
+            sendMessageRoute,
+            emptyMessageTranslation,
+            $(this).val()
+    );
+        return false;
+    }
+});
+
 function sendMessage(
     route,
     emptyMessageError,
@@ -54,6 +83,13 @@ function sendMessage(
 }
 
 //----------------------------SEARCH--------------------------
+$('#searchInput').keyup(function (e) {
+    //13 = enter
+    if ($(this).val().length >= 3 && e.keyCode === 13 && '' !== '{{ auth()->id() }}') {
+        searchMessages($(this).val(),  searchMessageRoute);
+    }
+});
+
 function searchMessages(keyword, route) {
     originalMessagesWrapper.hide();
     searchMessagesGrid.hide();
@@ -108,20 +144,31 @@ function searchMessages(keyword, route) {
 
 //---------------------------DELETE-------------------------------
 function deleteAllMessages(element) {
-    $.ajax({
-        url : element.data('url'),
-        type: 'POST',
-        data : {},
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
-        success: function(data, textStatus, jqXHR)
-        {
+    Swal.fire({
+        title: areYouSureTranslation,
+        showDenyButton: true,
+        confirmButtonText: 'Yes',
+        denyButtonText: 'No',
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+            Swal.fire('Saved!', '', 'success');
+            $.ajax({
+                url : deleteAllByUserRoute,
+                type: 'POST',
+                data : {},
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data, textStatus, jqXHR)
+                {
 
-        },
-        error: function (jqXHR, textStatus, errorThrown)
-        {
-            console.log(errorThrown);
+                },
+                error: function (jqXHR, textStatus, errorThrown)
+                {
+                    console.log(errorThrown);
+                }
+            });
         }
     });
 }
