@@ -106,6 +106,25 @@ function searchMessages(keyword, route) {
 }
 
 
+//---------------------------DELETE-------------------------------
+function deleteAllMessages(element) {
+    $.ajax({
+        url : element.data('url'),
+        type: 'POST',
+        data : {},
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(data, textStatus, jqXHR)
+        {
+
+        },
+        error: function (jqXHR, textStatus, errorThrown)
+        {
+            console.log(errorThrown);
+        }
+    });
+}
 //--------------------------------HELPERS-------------------------
 function messageHtml(message) {
     message =

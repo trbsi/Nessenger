@@ -35,6 +35,9 @@
                         <a class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200" href="{{ route('profile.show') }}">
                             {{__('home.links.settings')}}
                         </a>
+                        <a data-url="{{ api_route('messages.delete.all-by-user') }}" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200" href="javascript:;" onclick="deleteAllMessages($(this));">
+                            {{__('home.links.delete_all')}}
+                        </a>
                         <form method="POST" action="{{ route('logout') }}">
                         @csrf
 

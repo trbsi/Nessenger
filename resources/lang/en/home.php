@@ -6,6 +6,7 @@ return [
         'login' => 'Login',
         'register' => 'Register',
         'contact_me' => 'Contact me',
+        'delete_all' => 'Delete all messages',
     ],
     'messages' => [
         'showing_last_x_results' => 'Showing last :maxResults results. If you need more use search engine.',

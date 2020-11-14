@@ -2,6 +2,7 @@
 
 namespace App\Code\V1\Messages\Controllers;
 
+use App\Code\V1\Messages\Services\DeleteAllMessagesByUserService;
 use App\Code\V1\Messages\Services\SaveMessageService;
 use App\Code\V1\Messages\Services\SearchMessagesService;
 use Illuminate\Http\Request;
@@ -21,5 +22,11 @@ class MessagesController
     {
         $result = $searchMessagesService->search($request->message);
         return response()->json($result);
+    }
+
+    public function deleteByUser(Request $request, DeleteAllMessagesByUserService $deleteAllMessagesByUserService)
+    {
+        $deleteAllMessagesByUserService->deleteAllByUser();
+        return response()->json([]);
     }
 }
