@@ -17,6 +17,7 @@
     @include('home.messages')
 </div>
 @livewireScripts
+@include('javascript.general')
 @include('javascript.routes')
 @include('javascript.translations')
 <script src="{{ asset('js/jquery3.min.js') }}"></script>

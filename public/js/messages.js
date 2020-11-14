@@ -7,6 +7,7 @@ var latestMessagesWrapper = $('#latestMessagesWrapper');
 var searchMessagesSpinner = $('#searchMessagesSpinner');
 var searchMessagesGrid = $('#searchMessagesGrid');
 var searchMessagesNoResults = $('#searchMessagesNoResults');
+var minSearchChars = 3;
 
 //----------------------------SEND--------------------------
 $('#sendMessageIcon').click(function () {
@@ -85,12 +86,33 @@ function sendMessage(
 }
 
 //----------------------------SEARCH--------------------------
-$('#searchInput').keyup(function (e) {
-    //13 = enter
-    if ($(this).val().length >= 3 && e.keyCode === 13 && '' !== '{{ auth()->id() }}') {
-        searchMessages($(this).val(),  searchMessageRoute);
+$('#searchStartIcon').click(function () {
+    var term = searchInput.val();
+    if (term.length >= minSearchChars && '' !== userId) {
+        searchMessages(term,  searchMessageRoute);
     }
 });
+
+$('#searchResetIcon').click(function () {
+    resetSearch();
+});
+
+searchInput.keyup(function (e) {
+    var term = $(this).val();
+    if (term.length >= minSearchChars && e.keyCode === 13 && '' !== userId) { //13 = enter
+        searchMessages(term,  searchMessageRoute);
+    } else if ((e.keyCode === 8 || e.keyCode === 46) && term === '') { //backspace and delete
+        resetSearch();
+    }
+});
+
+function resetSearch() {
+    searchMessagesWrapper.hide();
+    latestMessagesWrapper.show();
+    searchResetIcon.hide();
+    searchStartIcon.show();
+    scrollMessagesToBottom();
+}
 
 function searchMessages(keyword, route) {
     latestMessagesWrapper.hide();
