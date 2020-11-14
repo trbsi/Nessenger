@@ -72,8 +72,10 @@ function sendMessage(
             $(append).appendTo('#originalMessagesGrid');
 
             //https://stackoverflow.com/questions/270612/scroll-to-bottom-of-div/26293764
-            scrollMessagesToBottom();
             $('textarea#typeMessage').val('');
+            searchMessagesWrapper.hide();
+            originalMessagesWrapper.show();
+            scrollMessagesToBottom();
         },
         error: function (jqXHR, textStatus, errorThrown)
         {
