@@ -16,6 +16,7 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     'contact_mail' => 'dariotrbovic@yahoo.com',
+    'paypal_me' => 'https://paypal.me/dariotrbovic',
 
     /*
     |--------------------------------------------------------------------------

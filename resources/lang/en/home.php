@@ -8,6 +8,7 @@ return [
         'register' => 'Register',
         'contact_me' => 'Contact me',
         'delete_all' => 'Delete all messages',
+        'buy_me_a_beer' => 'Buy me a beer',
     ],
     'messages' => [
         'showing_last_x_results' => 'Showing last :maxResults results. If you need more use search engine.',

@@ -19,6 +19,9 @@
             <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
 
             <div x-show="dropdownOpen" class="absolute right-0 mt-15 w-48 bg-white rounded-md overflow-hidden shadow-xl z-20">
+                <a  href="{{ config('app.paypal_me') }}" target="_blank" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">
+                    {{__('home.links.buy_me_a_beer')}}
+                </a>
                 @guest
                     <a  href="{{ route('login') }}" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">
                         {{__('home.links.login')}}
