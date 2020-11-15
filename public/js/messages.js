@@ -176,7 +176,7 @@ function deleteAllMessages(element) {
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            Swal.fire('Saved!', '', 'success');
+            Swal.fire(hangOnTranslation, '', 'success');
             $.ajax({
                 url : deleteAllByUserRoute,
                 type: 'POST',
@@ -186,7 +186,7 @@ function deleteAllMessages(element) {
                 },
                 success: function(data, textStatus, jqXHR)
                 {
-
+                    location.reload();
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {

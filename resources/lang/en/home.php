@@ -2,6 +2,7 @@
 return [
     'search_term' => 'What do you want to find?',
     'are_you_sure' => 'Are you sure?',
+    'hang_on' => 'Hang on...',
     'links' => [
       'settings' => 'Settings',
         'login' => 'Login',
