@@ -19,7 +19,7 @@ final class DeleteByQueryService implements DeleteByQueryServiceInterface
         $client = ClientBuilder::create()->build();
         $params = [
             'index' => $indexName,
-            'query' => $query,
+            'body' => $query,
         ];
         return $client->deleteByQuery($params);
     }

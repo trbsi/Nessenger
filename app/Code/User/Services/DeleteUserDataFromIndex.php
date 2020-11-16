@@ -20,8 +20,10 @@ final class DeleteUserDataFromIndex
     public function deleteDataFromIndex(int $userId): void
     {
         $query = [
-            'match' => [
-                'user_id' => $userId
+            'query' => [
+                'match' => [
+                    'user_id' => $userId
+                ]
             ]
         ];
         $this->deleteByQueryService->deleteByQuery(SearchEnum::INDEX_TYPE_MESSAGES, $query);

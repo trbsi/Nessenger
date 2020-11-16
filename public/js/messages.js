@@ -176,10 +176,16 @@ function deleteAllMessages(element) {
     }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-            Swal.fire(hangOnTranslation, '', 'success');
+            Swal.fire(
+            {
+                icon: 'info',
+                title: hangOnTranslation,
+                showCancelButton: false,
+                showConfirmButton: false
+            });
             $.ajax({
                 url : deleteAllByUserRoute,
-                type: 'POST',
+                type: 'DELETE',
                 data : {},
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

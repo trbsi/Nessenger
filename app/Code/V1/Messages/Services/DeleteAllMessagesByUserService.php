@@ -30,8 +30,10 @@ class DeleteAllMessagesByUserService
     private function deleteFromSearch(): void
     {
         $query = [
-            'match' => [
-                'user_id' => Auth::id()
+            'query' => [
+                'match' => [
+                    'user_id' => Auth::id()
+                ]
             ]
         ];
         $this->deleteByQueryService->deleteByQuery(SearchEnum::INDEX_TYPE_MESSAGES, $query);

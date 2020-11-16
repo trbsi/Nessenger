@@ -42,14 +42,14 @@
                             {{__('home.links.delete_all')}}
                         </a>
                         <form method="POST" action="{{ route('logout') }}">
-                        @csrf
+                            @csrf
 
-                        <x-jet-dropdown-link href="{{ route('logout') }}"
-                                             onclick="event.preventDefault();
-                                                        this.closest('form').submit();">
-                            {{ __('Logout') }}
-                        </x-jet-dropdown-link>
-                    </form>
+                            <x-jet-dropdown-link href="{{ route('logout') }}"
+                                                 onclick="event.preventDefault();
+                                                            this.closest('form').submit();" class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200">
+                                {{ __('Logout') }}
+                            </x-jet-dropdown-link>
+                        </form>
                 @endauth
                 <a  class="block px-4 py-2 text-sm text-gray-800 border-b hover:bg-gray-200" href="mailto:{{config('app.contact_mail')}}">
                     {{__('home.links.contact_me')}}
