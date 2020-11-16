@@ -29,12 +29,13 @@ final class ReindexSearchService
         $this->createIndexService = $createIndexService;
         $this->deleteIndexService = $deleteIndexService;
         $this->bulkIndexDocumentService = $bulkIndexDocumentService;
-        $this->newIndexName = sprintf('%s_%s', SearchEnum::INDEX_TYPE_MESSAGES, date('Y_m_d_H_i_s'));
-        $this->oldIndexName = Index::getCurrentIndexName(SearchEnum::INDEX_TYPE_MESSAGES);
     }
 
     public function reindex(int $perPage): void
     {
+        $this->newIndexName = sprintf('%s_%s', SearchEnum::INDEX_TYPE_MESSAGES, date('Y_m_d_H_i_s'));
+        $this->oldIndexName = Index::getCurrentIndexName(SearchEnum::INDEX_TYPE_MESSAGES);
+
         $offset = 0;
         $this->createIndex();
         do {
