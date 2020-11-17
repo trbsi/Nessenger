@@ -19,5 +19,5 @@ return [
     'hi' => 'Hi',
     'login_as_test_user' => 'Login as test user',
     'type_msg_input' => 'Type a message',
-    'you_are_not_logged_in' => 'You are not loggedin. <a href=":loginUrl" class="underline">Login as yourself</a> or <a href=":loginTestUrl" class="underline">login as test user</a> to use :appName',
+    'you_are_not_logged_in' => 'You are not loggedin. <a href=":loginUrl" class="underline">Login as yourself</a>, <a href=":loginTestUrl" class="underline">login as test user</a> or <a href=":registerUrl" class="underline">register</a> to use :appName',
 ];

@@ -19,6 +19,7 @@ class HomeController extends Controller
             $errorMessage = __('home.you_are_not_logged_in', [
                 'loginUrl' => route('login'),
                 'loginTestUrl' => route('login', ['test' => 1]),
+                'registerUrl' => route('register'),
                 'appName' => env('APP_NAME'),
             ]);
         }
