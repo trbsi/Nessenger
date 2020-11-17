@@ -192,7 +192,9 @@ function deleteAllMessages(element) {
                 },
                 success: function(data, textStatus, jqXHR)
                 {
-                    location.reload();
+                    setTimeout(function() {
+                        location.reload();
+                    }, 5000);
                 },
                 error: function (jqXHR, textStatus, errorThrown)
                 {
