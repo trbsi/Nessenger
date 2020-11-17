@@ -394,7 +394,8 @@ main {
 }
 
 .col-message-sent {
-    margin-left: calc(8.33333333% + 0.08333333em) !important
+    margin-left: calc(8.33333333% + 0.08333333em) !important;
+    word-break: break-all;
 }
 
 .col-message-received {

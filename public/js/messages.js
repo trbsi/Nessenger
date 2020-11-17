@@ -21,23 +21,26 @@ $('#sendMessageIcon').click(function () {
 
 //CTRL + ENTER for new line
 //https://stackoverflow.com/questions/8187512/textarea-control-custom-behavior-enter-ctrlenter
-$('textarea#typeMessage').keydown(function (e) {
-    if ((e.keyCode === 13 && e.ctrlKey) || (e.keyCode === 13 && e.shiftKey)) {
-        $(this).val(function (i, val) {
-            return val + "";
-        });
-    }
-}).keypress(function (e) {
-    //13 = enter
-    if (e.keyCode === 13 && (!e.ctrlKey && !e.shiftKey)) {
-        sendMessage(
-            sendMessageRoute,
-            emptyMessageTranslation,
-            $(this).val()
-    );
-        return false;
-    }
-});
+if(!isMobile()){
+    $('textarea#typeMessage').keydown(function (e) {
+        if ((e.keyCode === 13 && e.ctrlKey) || (e.keyCode === 13 && e.shiftKey)) {
+            $(this).val(function (i, val) {
+                return val + "";
+            });
+        }
+    }).keypress(function (e) {
+        //13 = enter
+        if (e.keyCode === 13 && (!e.ctrlKey && !e.shiftKey)) {
+            sendMessage(
+                sendMessageRoute,
+                emptyMessageTranslation,
+                $(this).val()
+            );
+            return false;
+        }
+    });
+}
+
 
 function sendMessage(
     route,
@@ -86,14 +89,14 @@ function sendMessage(
 }
 
 //----------------------------SEARCH--------------------------
-$('#searchStartIcon').click(function () {
+searchStartIcon.click(function () {
     var term = searchInput.val();
     if (term.length >= minSearchChars && '' !== userId) {
         searchMessages(term,  searchMessageRoute);
     }
 });
 
-$('#searchResetIcon').click(function () {
+searchResetIcon.click(function () {
     resetSearch();
 });
 
@@ -233,3 +236,14 @@ searchResetIcon.click(function () {
     latestMessagesWrapper.show();
     scrollMessagesToBottom();
 });
+
+function isMobile() {
+    // credit to Timothy Huang for this regex test:
+    // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)){
+        return true
+    }
+    else{
+        return false
+    }
+}
