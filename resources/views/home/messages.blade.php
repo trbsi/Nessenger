@@ -29,7 +29,7 @@
                 <div class="col-foot" id="composeMessageWrapper">
                     <div class="compose">
                         <textarea placeholder="{{ __('home.type_msg_input') }}" id="typeMessage"
-                                  class="w-11/12"></textarea>
+                                  class="w-11/12 h-screen"></textarea>
                         <div class="compose-dock">
                             <div class="dock"><!-- TODO <img src="./img/picture.svg"> --><img src="./img/send.png"
                                                                                 id="sendMessageIcon"></div>
