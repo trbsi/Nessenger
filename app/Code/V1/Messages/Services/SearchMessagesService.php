@@ -29,7 +29,7 @@ final class SearchMessagesService
         $query = [
             'sort' => [
                 [
-                    'created_at' => 'desc',
+                    'created_at' => 'asc',
                 ],
             ],
             'query' => [
